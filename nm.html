@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digitale Visitenkarte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .profile-card {
+            background-color: #14508c;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            margin-top: 20px;
+        }
+        .card-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .info-card, .social-card, .address-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .info-card i, .social-card i {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .info-card a, .social-card a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .info-card a:hover, .social-card a:hover {
+            text-decoration: underline;
+        }
+        #map {
+            height: 200px;
+            border-radius: 10px;
+        }
+        .company-header {
+            text-align: center;
+            padding: 10px;
+        }
+        .company-logo img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container card-container">
+        <div class="profile-card">
+            <div class="company-header">
+                <img src="MMBbS-Logo_quer_white.png" alt="Firmenlogo" class="company-logo" width="200">
+            </div>
+            <img src="nm.jpg" alt="Profilbild" class="profile-img">
+            <br><br>
+            <h3>André Neumann</h3>
+            <p>Teamleiter der kaufmännischen IT-Berufe (KIT)</p>
+        </div>
+
+        <div class="info-card text-center">
+            <a href="nm.vcf" download class="btn btn-light w-100 mb-2">
+                <i class="fas fa-download"></i> Kontakt speichern
+            </a>
+        </div>
+
+        <div class="info-card text-center">
+            <button class="btn btn-light w-100" type="button" data-bs-toggle="collapse" data-bs-target="#qrCollapse">
+                <i class="fas fa-qrcode"></i> QR-Code anzeigen
+            </button>
+            <div class="collapse mt-3" id="qrCollapse">
+                <img src="nm_qr.png" alt="QR-Code" class="img-fluid">
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h5>Links</h5>
+            <p><i class="fas fa-phone"></i> <a href="tel:+4951164619811">Anrufen (Sekretariat)</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:neumann@mmbbs.de">E-Mail</a></p>
+            <p><i class="fas fa-globe"></i> <a href="https://www.herr-nm.de" target="_blank">Meine persönliche Webseite</a></p>
+            <p><i class="fab fa-github"></i> <a href="https://github.herr-nm.de" target="_blank">Meine GitHub-Repositorys</a></p>
+            <p><i class="fab fa-youtube"></i> <a href="https://youtube.com/@herr-nm" target="_blank">Mein YouTube-Kanal für Lernende</a></p>
+            <p><i class="fab fa-youtube"></i> <a href="https://youtube.com/@herr-nm-teaching" target="_blank">Mein YouTube-Kanal für Lehrende</a></p>
+            <p><i class="fas fa-globe"></i> <a href="https://www.mmbbs.de" target="_blank">Website der MMBbS</a></p>
+        </div>
+
+        <div class="social-card">
+            <h5>Social Media</h5>
+            <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/herr-nm/" target="_blank">Mein persönliches LinkedIn-Profil</a></p>
+            <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/herr-nm/" target="_blank">MMBbS auf LinkedIn</a></p>
+            <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/mmbbs_hannover" target="_blank">MMBbS auf Instagram</a></p>
+        </div>
+
+        <div class="address-card">
+            <h5>Adresse der MMBbS</h5>
+            <p>Expo Plaza 3, 30539 Hannover</p>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([52.3205168, 9.815254], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        L.marker([52.3205168, 9.815254]).addTo(map)
+            .bindPopup('MMBbS')
+            .openPopup();
+    </script>
+</body>
+</html>
