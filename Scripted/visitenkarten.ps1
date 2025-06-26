@@ -17,7 +17,7 @@ $excelFile = "visitenkarten.xlsx"
 $data = Import-Excel -Path $excelFile
 
 # Standardwerte
-$companyLogo = "mmbbs_logo.png"
+$companyLogo = "mmbbs_logo.svg"
 $defaultPhone = "+4951164619811"
 $baseEmail = "@mmbbs.de"
 $mapLat = "52.3205168"
