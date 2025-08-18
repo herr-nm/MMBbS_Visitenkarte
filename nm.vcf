@@ -2,8 +2,8 @@ BEGIN:VCARD
 VERSION:3.0
 N;CHARSET=UTF-8:Neumann;André;;;
 FN;CHARSET=UTF-8: André Neumann
-ORG;CHARSET=UTF-8:Multi Media Berufsbildende Schulen der Region Hannover;Koordination IT-Infrastruktur & Teamleitung der kaufmännischen IT-Berufe
-TITLE;CHARSET=UTF-8:Oberstudienrat
+ORG;CHARSET=UTF-8:Multi Media Berufsbildende Schulen der Region Hannover
+TITLE;CHARSET=UTF-8:Koordination IT-Infrastruktur
 URL;WORK:mmbbs.de
 URL;PRIVATE:herr-nm.de
 EMAIL;type=WORK;type=PREF:neumann@mmbbs.de
