@@ -92,7 +92,7 @@
         }
         .qbtn svg { width: 24px; height: 24px; }
         .qbtn:hover { background: rgba(255, 255, 255, .12); }
-        .qbtn:focus-visible, .btn:focus-visible, .row:focus-visible, .kb-btn:focus-visible, .f-links a:focus-visible, .f-links button:focus-visible, .sq:focus-visible {
+        .qbtn:focus-visible, .btn:focus-visible, .row:focus-visible, .kb-btn:focus-visible {
             outline: 3px solid var(--gelb); outline-offset: 2px;
         }
 
@@ -136,6 +136,7 @@
         .btn svg { width: 20px; height: 20px; }
         .btn.blue { background: var(--blau); color: #fff; }
         .profile .btn { margin-top: 18px; width: 100%; }
+        .profile .btn.alt { margin-top: 10px; background: var(--himmel); color: #0f3d6b; }
 
         .card {
             background: var(--card);
@@ -177,28 +178,11 @@
 
         /* ---------- Footer (wie mmbbs.de) ---------- */
         .site-footer {
-            background: var(--grad); color: #fff;
+            background: var(--grad);
             border-top: 4px solid var(--gelb);
-            padding-top: 26px; padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-top: 22px; padding-bottom: max(22px, env(safe-area-inset-bottom));
         }
-        .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 18px; }
-        .f-brand { grid-column: 1 / -1; }
-        .f-brand img { display: block; height: 38px; width: auto; }
-        .socials { display: flex; gap: 10px; margin-top: 16px; }
-        .sq {
-            width: 40px; height: 40px; display: grid; place-items: center;
-            background: #fff; color: #0f2a45; border-radius: 4px;
-        }
-        .sq svg { width: 20px; height: 20px; }
-        .f-links { list-style: none; margin: 0; padding: 0; }
-        .f-links li { margin: 0 0 12px; }
-        .f-links a, .f-links button {
-            color: #fff; font: inherit; font-weight: 700; text-decoration: none;
-            background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
-        }
-        .f-links a:hover, .f-links button:hover { text-decoration: underline; }
-        .copy { margin: 10px 0 0; font-size: .8rem; opacity: .85; }
-        .hint { margin: 0; font-size: .85rem; opacity: .95; grid-column: 1 / -1; }
+        .site-footer img { display: block; height: 38px; width: auto; }
 
         /* ---------- QR-Dialog ---------- */
         dialog {
@@ -218,10 +202,6 @@
         #toast.show { opacity: 1; transform: translateX(-50%); }
         @media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
 
-        @media (min-width: 560px) {
-            .f-grid { grid-template-columns: 1.4fr 1fr 1fr; }
-            .f-brand { grid-column: auto; }
-        }
     </style>
 </head>
 <body>
@@ -287,6 +267,9 @@
 
         <a class="btn" href="nm.vcf" download>
             <svg aria-hidden="true"><use href="#i-download"/></svg> Kontakt speichern
+        </a>
+        <a class="btn alt" id="androidAdd" href="#" hidden>
+            <svg aria-hidden="true"><use href="#i-phone"/></svg> Direkt als neuen Kontakt anlegen
         </a>
     </section>
 
@@ -367,27 +350,7 @@
 
 <footer class="site-footer">
     <div class="inner">
-        <div class="f-grid">
-            <div class="f-brand">
-                <img src="mmbbs_logo.svg" alt="Multi Media Berufsbildende Schulen">
-                <div class="socials">
-                    <a class="sq" href="https://www.linkedin.com/school/mmbbs/" target="_blank" rel="noopener" aria-label="MMBbS auf LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
-                    <a class="sq" href="https://www.instagram.com/multi_media_bbs/" target="_blank" rel="noopener" aria-label="MMBbS auf Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a>
-                </div>
-            </div>
-            <ul class="f-links">
-                <li><a href="https://www.mmbbs.de" target="_blank" rel="noopener">Website der MMBbS</a></li>
-                <li><a href="https://www.herr-nm.de" target="_blank" rel="noopener">Persönliche Webseite</a></li>
-                <li><a href="https://github.com/herr-nm/" target="_blank" rel="noopener">GitHub</a></li>
-            </ul>
-            <ul class="f-links">
-                <li><a href="#adresse">Anfahrt</a></li>
-                <li><button type="button" data-qr>QR-Code anzeigen</button></li>
-                <li><button type="button" id="installBtn" hidden>Als App installieren</button></li>
-            </ul>
-            <p class="hint" id="iosHint" hidden>Tipp: Im Teilen-Menü „Zum Home-Bildschirm“ wählen, um die Karte als App zu speichern.</p>
-        </div>
-        <p class="copy">© André Neumann · MMBbS Hannover</p>
+        <img src="mmbbs_logo.svg" alt="Multi Media Berufsbildende Schulen">
     </div>
 </footer>
 
@@ -455,21 +418,22 @@
             'src="https://www.openstreetmap.org/export/embed.html?bbox=9.800%2C52.312%2C9.830%2C52.329&amp;layer=mapnik&amp;marker=52.3205168%2C9.815254"></iframe>';
     });
 
-    // PWA: Installation anbieten
-    const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-    let installEvent = null;
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault(); installEvent = e;
-        if (!standalone) $('installBtn').hidden = false;
-    });
-    $('installBtn').addEventListener('click', async () => {
-        if (!installEvent) return;
-        installEvent.prompt();
-        await installEvent.userChoice;
-        installEvent = null; $('installBtn').hidden = true;
-    });
-    window.addEventListener('appinstalled', () => { $('installBtn').hidden = true; });
-    if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !standalone) $('iosHint').hidden = false;
+    // Android: Kontakt direkt im Kontakte-Editor anlegen (statt .vcf herunterladen)
+    if (/android/i.test(navigator.userAgent)) {
+        const data = {
+            name: 'André Neumann',
+            phone: '+49 157 86887903',
+            secondary_phone: '+49 511 64619826',
+            company: 'Multi Media Berufsbildende Schulen der Region Hannover',
+            job_title: 'Koordination IT-Infrastruktur',
+            postal: 'Expo Plaza 3, 30539 Hannover'
+            // E-Mail bei Bedarf hier ergänzen:  email: '…'
+        };
+        const extras = Object.entries(data).map(([k, v]) => 'S.' + k + '=' + encodeURIComponent(v)).join(';');
+        const a = $('androidAdd');
+        a.href = 'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;' + extras + ';end';
+        a.hidden = false;
+    }
 
     // PWA: Service Worker für Offline-Betrieb
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
