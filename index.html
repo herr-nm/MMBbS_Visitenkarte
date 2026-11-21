@@ -252,25 +252,25 @@
         <div class="kb-panel" id="kb4" hidden>
             <h2>Koordinationsbereich 4</h2>
             <ul>
-                <li>Team Kaufmännische IT-Berufe (KIT)</li>
+                <li>Team Kaufmännische IT-Berufe <strong>(KIT)</strong></li>
             </ul>
         </div>
         <div class="kb-panel" id="kb3" hidden>
             <h2>Stellv. Koordinationsbereich 3</h2>
             <ul>
-                <li>Team Fachinformatiker Anwendungsentwicklung &amp; Daten- und Prozessanalyse (FIAE &amp; FIDP)</li>
-                <li>Team Fachinformatiker Systemintegration &amp; Digitale Vernetzung (FISI &amp; FIDV)</li>
-                <li>Team Fachangestellte für Medien- und Informationsdienste</li>
-                <li>Team Fachpraktiker Systemintegration</li>
+                <li>Team Fachinformatiker Anwendungsentwicklung &amp; Daten- und Prozessanalyse <strong>(FIAE &amp; FIDP)</strong></li>
+                <li>Team Fachinformatiker Systemintegration &amp; Digitale Vernetzung <strong>(FISI &amp; FIDV)</strong></li>
+                <li>Team Fachangestellte für Medien- und Informationsdienste <strong>(FAMI)</strong></li>
+                <li>Team Fachpraktiker Systemintegration <strong>(FPIT)</strong></li>
             </ul>
         </div>
 
         <a class="btn" href="nm.vcf" download>
             <svg aria-hidden="true"><use href="#i-download"/></svg> Kontakt speichern
         </a>
-        <a class="btn alt" id="androidAdd" href="#" hidden>
-            <svg aria-hidden="true"><use href="#i-phone"/></svg> Direkt als neuen Kontakt anlegen
-        </a>
+        <button class="btn alt" type="button" id="shareContact" hidden>
+            <svg aria-hidden="true"><use href="#i-share"/></svg> Kontakt teilen
+        </button>
     </section>
 
     <section class="card a1" aria-labelledby="h-kontakt">
@@ -418,22 +418,28 @@
             'src="https://www.openstreetmap.org/export/embed.html?bbox=9.800%2C52.312%2C9.830%2C52.329&amp;layer=mapnik&amp;marker=52.3205168%2C9.815254"></iframe>';
     });
 
-    // Android: Kontakt direkt im Kontakte-Editor anlegen (statt .vcf herunterladen)
-    if (/android/i.test(navigator.userAgent)) {
-        const data = {
-            name: 'André Neumann',
-            phone: '+49 157 86887903',
-            secondary_phone: '+49 511 64619826',
-            company: 'Multi Media Berufsbildende Schulen der Region Hannover',
-            job_title: 'Koordination IT-Infrastruktur',
-            postal: 'Expo Plaza 3, 30539 Hannover'
-            // E-Mail bei Bedarf hier ergänzen:  email: '…'
-        };
-        const extras = Object.entries(data).map(([k, v]) => 'S.' + k + '=' + encodeURIComponent(v)).join(';');
-        const a = $('androidAdd');
-        a.href = 'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;' + extras + ';end';
-        a.hidden = false;
-    }
+    // Kontakt teilen: die vCard als Datei an andere Apps geben (Signal, WhatsApp, Mail, Bluetooth …)
+    // Der Empfänger bekommt eine Kontaktkarte und kann sie mit einem Tipp speichern.
+    (async () => {
+        const btn = $('shareContact');
+        if (!navigator.share || !navigator.canShare) return;
+        let file;
+        try {
+            const res = await fetch('nm.vcf');
+            if (!res.ok) return;
+            const blob = await res.blob();
+            file = new File([blob], 'Andre-Neumann.vcf', { type: 'text/vcard' });
+        } catch (e) { return; }
+        if (!navigator.canShare({ files: [file] })) return;
+        btn.hidden = false;
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.share({ files: [file], title: 'André Neumann' });
+            } catch (e) {
+                if (e.name !== 'AbortError') toast('Teilen nicht möglich – bitte „Kontakt speichern“ nutzen');
+            }
+        });
+    })();
 
     // PWA: Service Worker für Offline-Betrieb
     if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

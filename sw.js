@@ -1,6 +1,6 @@
 // Service Worker der digitalen Visitenkarte
 // Bei jeder Änderung an den Dateien die Versionsnummer erhöhen, damit Handys die neue Fassung laden.
-const CACHE = 'visitenkarte-v3';
+const CACHE = 'visitenkarte-v5';
 
 const ASSETS = [
     './',
