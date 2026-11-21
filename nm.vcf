@@ -1,15 +1,16 @@
 BEGIN:VCARD
 VERSION:3.0
-N;CHARSET=UTF-8:Neumann;André;;;
-FN;CHARSET=UTF-8: André Neumann
-ORG;CHARSET=UTF-8:Multi Media Berufsbildende Schulen der Region Hannover
-TITLE;CHARSET=UTF-8:Koordination IT-Infrastruktur
-URL;WORK:mmbbs.de
-URL;PRIVATE:herr-nm.de
-EMAIL;type=WORK;type=PREF:neumann@mmbbs.de
-TEL;type=WORK;VOICE:+49 511 – 64 61 98-26
-ADR;CHARSET=UTF-8;WORK;type=pref:;;Expo Plaza 3;Hannover;;30539;Deutschland
-LABEL;WORK;PREF;ENCODING=QUOTED-PRINTABLE;CHARSET=UTF-8:Expo Plaza 3=0D=0A=
-30539 Hannover Deutschland
-REV:2025-02-12T16:26:41+01:00
+N:Neumann;André;;;
+FN:André Neumann
+ORG:Multi Media Berufsbildende Schulen der Region Hannover
+TITLE:Koordination IT-Infrastruktur
+URL;TYPE=WORK:https://www.mmbbs.de
+URL;TYPE=HOME:https://www.herr-nm.de
+EMAIL;TYPE=INTERNET,WORK,PREF:neumann@mmbbs.de
+TEL;TYPE=CELL,VOICE:+49 157 86887903
+TEL;TYPE=WORK,VOICE:+49 511 64619826
+TEL;TYPE=WORK,VOICE:+49 511 64619811
+ADR;TYPE=WORK,PREF:;;Expo Plaza 3;Hannover;;30539;Deutschland
+LABEL;TYPE=WORK,PREF:Expo Plaza 3\n30539 Hannover\nDeutschland
+REV:2026-11-21
 END:VCARD

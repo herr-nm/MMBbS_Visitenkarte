@@ -13,6 +13,8 @@
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <meta name="mobile-web-app-capable" content="yes">
@@ -368,10 +370,24 @@
         <div class="f-grid">
             <div class="f-brand">
                 <img src="mmbbs_logo.svg" alt="Multi Media Berufsbildende Schulen">
-                
+                <div class="socials">
+                    <a class="sq" href="https://www.linkedin.com/school/mmbbs/" target="_blank" rel="noopener" aria-label="MMBbS auf LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                    <a class="sq" href="https://www.instagram.com/multi_media_bbs/" target="_blank" rel="noopener" aria-label="MMBbS auf Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a>
+                </div>
+            </div>
+            <ul class="f-links">
+                <li><a href="https://www.mmbbs.de" target="_blank" rel="noopener">Website der MMBbS</a></li>
+                <li><a href="https://www.herr-nm.de" target="_blank" rel="noopener">Persönliche Webseite</a></li>
+                <li><a href="https://github.com/herr-nm/" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <ul class="f-links">
+                <li><a href="#adresse">Anfahrt</a></li>
+                <li><button type="button" data-qr>QR-Code anzeigen</button></li>
+                <li><button type="button" id="installBtn" hidden>Als App installieren</button></li>
+            </ul>
             <p class="hint" id="iosHint" hidden>Tipp: Im Teilen-Menü „Zum Home-Bildschirm“ wählen, um die Karte als App zu speichern.</p>
         </div>
-        <p class="copy">© André Neumann · MMBbS</p>
+        <p class="copy">© André Neumann · MMBbS Hannover</p>
     </div>
 </footer>
 

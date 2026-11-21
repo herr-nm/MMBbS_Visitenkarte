@@ -1,6 +1,6 @@
 // Service Worker der digitalen Visitenkarte
 // Bei jeder Änderung an den Dateien die Versionsnummer erhöhen, damit Handys die neue Fassung laden.
-const CACHE = 'visitenkarte-v1';
+const CACHE = 'visitenkarte-v3';
 
 const ASSETS = [
     './',
@@ -10,6 +10,8 @@ const ASSETS = [
     'nm.jpg',
     'nm_qr.png',
     'nm.vcf',
+    'icons/favicon-32.png',
+    'icons/favicon-48.png',
     'icons/icon-192.png',
     'icons/icon-512.png',
     'icons/apple-touch-icon.png'
